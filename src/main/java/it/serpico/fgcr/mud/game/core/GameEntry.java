@@ -1,9 +1,7 @@
 package it.serpico.fgcr.mud.game.core;
 
-import it.serpico.fgcr.mud.game.core.npc.FriendlyNpc;
-import it.serpico.fgcr.mud.game.core.player.Player;
-import it.serpico.fgcr.mud.game.core.rooms.EncounterRoom;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,19 +10,20 @@ public class GameEntry {
 
     private static int rounds = 0;
 
+    private static GameSession gameSession = new GameSession();
+
     public static void main(String... args) {
-        for (int x = 0; x < 5; x++)
-            new GameLoop() {
-                @Override
-                protected void processGameLoop() {
-                    log.log(Level.INFO, "Thread: {0}", Thread.currentThread());
-                    while (isGameRunning()) {
-                        log.log(Level.INFO, "Am i alive? {0}", Player.bIAmAlive());
-                        gameController.resolveEncounter(new EncounterRoom("Test Encounter Room", new FriendlyNpc("Amico delle guardie")));
-                        stop();
-                    }
-                }
-            }.run();
+        log.log(Level.INFO, "Map start: {0}", gameSession.gameLoopConcurrentHashMap.size());
+        List<String> gameSessionInProgress = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            gameSessionInProgress.add(gameSession.startGameSession().getuId());
+            log.log(Level.INFO, "Map add: {0}", gameSession.gameLoopConcurrentHashMap.size());
+        }
+        gameSessionInProgress.forEach(a -> {
+            gameSession.stopGameSession(a);
+            log.log(Level.INFO, "Map remove: {0}", gameSession.gameLoopConcurrentHashMap.size());
+        });
+        log.log(Level.INFO, "Map end: {0}", gameSession.gameLoopConcurrentHashMap.size());
     }
 
 }

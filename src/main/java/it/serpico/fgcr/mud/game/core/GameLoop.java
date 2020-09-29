@@ -14,10 +14,15 @@ public abstract class GameLoop {
 
     protected GameController gameController;
 
-    public GameLoop() {
+    private final String uId;
+
+    public GameLoop(String uId) {
+        this.uId = uId;
         this.status = GameStatus.STOPPED;
         this.gameController = new GameController();
     }
+
+    protected abstract void processGameLoop();
 
     public void run() {
         this.status = GameStatus.RUNNING;
@@ -34,9 +39,15 @@ public abstract class GameLoop {
         this.status = GameStatus.PAUSED;
     }
 
-    public boolean isGameRunning() {
-        return this.status != GameStatus.STOPPED;
+    public void unpause() {
+        this.status = GameStatus.RUNNING;
     }
 
-    protected abstract void processGameLoop();
+    public boolean isGameRunning() {
+        return this.status == GameStatus.RUNNING;
+    }
+
+    public String getuId() {
+        return uId;
+    }
 }
