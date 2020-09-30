@@ -1,4 +1,4 @@
-package it.serpico.fgcr.mud.game.core;
+package it.serpico.fgcr.mud.game.core.managers;
 
 
 import it.serpico.fgcr.mud.game.core.enums.GameStatus;
@@ -14,10 +14,10 @@ public abstract class GameLoop {
 
     protected GameController gameController;
 
-    private final String uId;
+    private final String UId;
 
-    public GameLoop(String uId) {
-        this.uId = uId;
+    public GameLoop(String UId) {
+        this.UId = UId;
         this.status = GameStatus.STOPPED;
         this.gameController = new GameController();
     }
@@ -47,7 +47,7 @@ public abstract class GameLoop {
         return this.status == GameStatus.RUNNING;
     }
 
-    public String getuId() {
-        return uId;
+    public String getUId() {
+        return UId;
     }
 }

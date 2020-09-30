@@ -1,15 +1,13 @@
 package it.serpico.fgcr.mud.game.core.npc;
 
-public class EnemyNpc extends Npc {
+import it.serpico.fgcr.mud.game.core.actions.ActionMessage;
+import it.serpico.fgcr.mud.game.core.actions.fight.ICanBeDamaged;
+import it.serpico.fgcr.mud.game.core.actions.fight.ICanDamageNotify;
 
-    private final int damage = 10;
+public class EnemyNpc extends Npc implements ICanDamageNotify, ICanBeDamaged {
 
     public EnemyNpc(String name) {
         super(name);
-    }
-
-    private int doDamage() {
-        return this.damage;
     }
 
     @Override
@@ -17,4 +15,22 @@ public class EnemyNpc extends Npc {
         return NbcDialogues.ENEMY_HELLO + getName();
     }
 
+    public ActionMessage takeDamage(ICanDamageNotify damage) {
+        return null;
+    }
+
+    @Override
+    public int getDamage() {
+        return 10;
+    }
+
+    @Override
+    public ActionMessage takeDamage(int damage) {
+        return null;
+    }
+
+    @Override
+    public ActionMessage doDamage(ICanBeDamaged taker) {
+        return null;
+    }
 }

@@ -1,4 +1,4 @@
-package it.serpico.fgcr.mud.game.core;
+package it.serpico.fgcr.mud.game.core.managers;
 
 import it.serpico.fgcr.mud.game.core.rooms.EncounterRoom;
 
