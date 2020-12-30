@@ -12,7 +12,7 @@ public class GameEntry {
 
     private static int rounds = 0;
 
-    public static void main(String... args) {
+    public String main(String... args) {
         for (int x = 0; x < 5; x++)
             new GameLoop() {
                 @Override
@@ -25,6 +25,7 @@ public class GameEntry {
                     }
                 }
             }.run();
+        return "";
     }
 
 }
